@@ -18,6 +18,7 @@ repositories {
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://repo.glaremasters.me/repository/public/")
     maven("https://nexus.phoenixdevt.fr/repository/maven-public/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://jitpack.io")
 }
 
@@ -36,8 +37,8 @@ dependencies {
     compileOnly(libs.papi)
 
     implementation(libs.nashorn)
-    implementation(libs.adventure.platform)
-    implementation(libs.adventure.minimessage)
+    //implementation(libs.adventure.platform)
+    //implementation(libs.adventure.minimessage)
 
     compileOnly("org.jetbrains:annotations:23.0.0")
 }
@@ -46,12 +47,12 @@ tasks {
     shadowJar {
         relocate("org.objectweb.asm", "com.extendedclip.deluxemenus.libs.asm")
         relocate("org.openjdk.nashorn", "com.extendedclip.deluxemenus.libs.nashorn")
-        relocate("net.kyori", "com.extendedclip.deluxemenus.libs.adventure")
+        //relocate("net.kyori", "com.extendedclip.deluxemenus.libs.adventure")
         archiveFileName.set("DeluxeMenus-${rootProject.version}.jar")
     }
     java {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     processResources {

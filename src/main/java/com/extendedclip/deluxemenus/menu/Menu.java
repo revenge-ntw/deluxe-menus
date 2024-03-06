@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 import me.clip.placeholderapi.util.Msg;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
@@ -48,7 +49,7 @@ public class Menu extends Command {
       int size, List<String> menuCommands, boolean registerCommand, List<String> args, List<RequirementList> argRequirements, boolean parsePlaceholdersInArguments) {
     super(menuCommands.get(0));
     this.menuName = menuName;
-    this.menuTitle = StringUtils.color(menuTitle);
+    this.menuTitle = menuTitle;
     this.items = items;
     this.size = size;
     this.menuCommands = menuCommands;
@@ -69,7 +70,7 @@ public class Menu extends Command {
       int size, boolean parsePlaceholdersInArguments) {
     super(menuName);
     this.menuName = menuName;
-    this.menuTitle = StringUtils.color(menuTitle);
+    this.menuTitle = menuTitle;
     this.items = items;
     this.size = size;
     this.parsePlaceholdersInArguments = parsePlaceholdersInArguments;
@@ -435,7 +436,7 @@ public class Menu extends Command {
         this.openHandler.onClick(holder);
       }
 
-      String title = StringUtils.color(holder.setPlaceholdersAndArguments(this.menuTitle));
+      Component title = StringUtils.color(holder.setPlaceholdersAndArguments(this.menuTitle));
 
       Inventory inventory;
 

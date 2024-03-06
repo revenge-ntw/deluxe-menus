@@ -2,6 +2,7 @@ package com.extendedclip.deluxemenus.menu;
 
 import com.extendedclip.deluxemenus.DeluxeMenus;
 import com.extendedclip.deluxemenus.utils.StringUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -255,18 +256,18 @@ public class MenuHolder implements InventoryHolder {
                         ItemMeta meta = i.getItemMeta();
 
                         if (item.options().displayNameHasPlaceholders() && item.options().displayName().isPresent()) {
-                            meta.setDisplayName(StringUtils.color(setPlaceholdersAndArguments(item.options().displayName().get())));
+                            meta.displayName(StringUtils.color(setPlaceholdersAndArguments(item.options().displayName().get())));
                         }
 
                         if (item.options().loreHasPlaceholders()) {
 
-                            List<String> updated = new ArrayList<>();
+                            List<Component> updated = new ArrayList<>();
 
                             for (String line : item.options().lore()) {
                                 updated.add(StringUtils
                                         .color(setPlaceholdersAndArguments(line)));
                             }
-                            meta.setLore(updated);
+                            meta.lore(updated);
                         }
 
                         i.setItemMeta(meta);

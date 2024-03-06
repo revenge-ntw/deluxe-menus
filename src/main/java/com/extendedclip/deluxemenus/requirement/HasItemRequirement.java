@@ -7,6 +7,8 @@ import com.extendedclip.deluxemenus.utils.StringUtils;
 import com.extendedclip.deluxemenus.utils.VersionHelper;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -87,8 +89,8 @@ public class HasItemRequirement extends Requirement {
       if (wrapper.getName() != null) {
         if (!metaToCheck.hasDisplayName()) return false;
 
-        String name = StringUtils.color(holder.setPlaceholdersAndArguments(wrapper.getName()));
-        String nameToCheck = StringUtils.color(holder.setPlaceholdersAndArguments(metaToCheck.getDisplayName()));
+        String name = StringUtils.colorLegacy(holder.setPlaceholdersAndArguments(wrapper.getName()));
+        String nameToCheck = StringUtils.colorLegacy(holder.setPlaceholdersAndArguments(metaToCheck.getDisplayName()));
 
         if (wrapper.checkNameContains() && wrapper.checkNameIgnoreCase()) {
           if (!org.apache.commons.lang3.StringUtils.containsIgnoreCase(nameToCheck, name)) return false;
@@ -108,8 +110,8 @@ public class HasItemRequirement extends Requirement {
         List<String> loreX = metaToCheck.getLore();
         if (loreX == null) return false;
 
-        String lore = wrapper.getLoreList().stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::color).collect(Collectors.joining("&&"));
-        String loreToCheck = loreX.stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::color).collect(Collectors.joining("&&"));
+        String lore = wrapper.getLoreList().stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::colorLegacy).collect(Collectors.joining("&&"));
+        String loreToCheck = loreX.stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::colorLegacy).collect(Collectors.joining("&&"));
 
         if (wrapper.checkLoreContains() && wrapper.checkLoreIgnoreCase()) {
           if (!org.apache.commons.lang3.StringUtils.containsIgnoreCase(loreToCheck, lore)) return false;
@@ -129,8 +131,8 @@ public class HasItemRequirement extends Requirement {
         List<String> loreX = metaToCheck.getLore();
         if (loreX == null) return false;
 
-        String lore = StringUtils.color(holder.setPlaceholdersAndArguments(wrapper.getLore()));
-        String loreToCheck = loreX.stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::color).collect(Collectors.joining("&&"));
+        String lore = StringUtils.colorLegacy(holder.setPlaceholdersAndArguments(wrapper.getLore()));
+        String loreToCheck = loreX.stream().map(holder::setPlaceholdersAndArguments).map(StringUtils::colorLegacy).collect(Collectors.joining("&&"));
 
         if (wrapper.checkLoreContains() && wrapper.checkLoreIgnoreCase()) {
           return org.apache.commons.lang3.StringUtils.containsIgnoreCase(loreToCheck, lore);

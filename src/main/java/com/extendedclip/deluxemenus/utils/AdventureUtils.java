@@ -13,7 +13,7 @@ public final class AdventureUtils {
     }
 
     public static void sendJson(CommandSender sender, String json) {
-        DeluxeMenus.getInstance().adventure().sender(sender).sendMessage(fromJson(json));
+        sender.sendMessage(fromJson(json));
     }
 
     public static Component fromJson(String json) {

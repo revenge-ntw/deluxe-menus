@@ -20,7 +20,6 @@ import com.extendedclip.deluxemenus.utils.VersionHelper;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import me.clip.placeholderapi.PlaceholderAPIPlugin;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -53,7 +52,6 @@ public class DeluxeMenus extends JavaPlugin {
   private PersistentMetaHandler persistentMetaHandler;
   private MenuItemMarker menuItemMarker;
   private DupeFixer dupeFixer;
-  private BukkitAudiences adventure;
 
   @Override
   public void onLoad() {
@@ -99,8 +97,6 @@ public class DeluxeMenus extends JavaPlugin {
 
     menuItemMarker = new MenuItemMarker(this);
     dupeFixer = new DupeFixer(this, menuItemMarker);
-
-    this.adventure = BukkitAudiences.create(this);
 
     setupItemHooks();
 
@@ -172,11 +168,6 @@ public class DeluxeMenus extends JavaPlugin {
     Bukkit.getMessenger().unregisterOutgoingPluginChannel(this, "BungeeCord");
 
     Bukkit.getScheduler().cancelTasks(this);
-
-    if (this.adventure != null) {
-      this.adventure.close();
-      this.adventure = null;
-    }
 
     Menu.unloadForShutdown();
 
@@ -289,11 +280,11 @@ public class DeluxeMenus extends JavaPlugin {
   }
 
   public void sms(CommandSender s, Component msg) {
-      adventure().sender(s).sendMessage(msg);
+      s.sendMessage(msg);
   }
 
   public void sms(CommandSender s, Messages msg) {
-    adventure().sender(s).sendMessage(msg.message());
+    s.sendMessage(msg.message());
   }
 
   public static void debug(@NotNull final DebugLevel debugLevel, @NotNull final Level level, @NotNull final String... messages) {
@@ -323,13 +314,6 @@ public class DeluxeMenus extends JavaPlugin {
 
   public PersistentMetaHandler getPersistentMetaHandler() {
     return persistentMetaHandler;
-  }
-
-  public BukkitAudiences adventure() {
-    if (this.adventure == null) {
-      throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
-    }
-    return this.adventure;
   }
 
   public void clearCaches() {
